@@ -1,0 +1,379 @@
+{
+  "info": {
+    "name": "Control Gestión GT - Express API",
+    "description": "Colección de endpoints de la API de Control de Gestión",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "control-gestion-gt-express",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Clients",
+      "item": [
+        {
+          "name": "Get All Clients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clients",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clients"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Client By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clients/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clients", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "Client ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cliente Ejemplo\",\n  \"description\": \"Descripción del cliente\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clients",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clients"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Client",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cliente Actualizado\",\n  \"description\": \"Descripción actualizada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clients/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clients", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "Client ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Client",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clients/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clients", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "Client ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/users",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/users/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "User ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User By Email",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/users/email/:email",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", "email", ":email"],
+              "variable": [
+                {
+                  "key": "email",
+                  "value": "user@example.com",
+                  "description": "User email"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"name\": \"Nombre Usuario\",\n  \"role\": \"developer\",\n  \"rut\": \"12345678-9\",\n  \"buk_id\": 123\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"updated@example.com\",\n  \"name\": \"Nombre Actualizado\",\n  \"role\": \"admin\",\n  \"rut\": \"12345678-9\",\n  \"buk_id\": 123\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "User ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/users/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "User ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check User Data Completion (Buk)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/users/complete-check?user_rut=12345678-9",
+              "host": ["{{base_url}}"],
+              "path": ["api", "users", "complete-check"],
+              "query": [
+                {
+                  "key": "user_rut",
+                  "value": "12345678-9",
+                  "description": "User RUT"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Leaves",
+      "item": [
+        {
+          "name": "Save Buk Leaves (Personal)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/leaves/personal?date=2024-01-01",
+              "host": ["{{base_url}}"],
+              "path": ["api", "leaves", "personal"],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2024-01-01",
+                  "description": "Optional date parameter (YYYY-MM-DD)"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Leaves By User ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/leaves/personal?user_id=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "leaves", "personal"],
+              "query": [
+                {
+                  "key": "user_id",
+                  "value": "1",
+                  "description": "User ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save Holiday Leaves",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/leaves/holidays?year=2024",
+              "host": ["{{base_url}}"],
+              "path": ["api", "leaves", "holidays"],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2024",
+                  "description": "Year for holidays"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Holiday Leaves",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/leaves/holidays?year=2024",
+              "host": ["{{base_url}}"],
+              "path": ["api", "leaves", "holidays"],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2024",
+                  "description": "Year for holidays"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}
