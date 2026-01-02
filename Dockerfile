@@ -43,8 +43,8 @@ RUN pnpm install --prod --frozen-lockfile
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
 
-# Expose the port (default 80, can be overridden with env variable)
-EXPOSE 80
+# Expose the port
+EXPOSE 8000
 
 # Set environment to production
 ENV NODE_ENV=production

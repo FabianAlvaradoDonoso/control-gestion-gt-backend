@@ -229,7 +229,7 @@ export class ProjectRepository {
 
   async getAreaById(areaId: number): Promise<Area | null> {
     return this.areaRepository.findOne({
-      where: { id: areaId.toString() },
+      where: { id: areaId },
     })
   }
 
@@ -238,4 +238,17 @@ export class ProjectRepository {
       where: { id: userId },
     })
   }
+
+  async getNextSequentialNumber(clientId: string, year: string): Promise<number> {
+    const result = await this.projectRepository
+      .createQueryBuilder('project')
+      .select('COUNT(project.id)', 'count')
+      .where('project.client_id = :clientId', { clientId })
+      .andWhere("TO_CHAR(project.created_at, 'YYYY') = :year", { year })
+      .getRawOne()
+
+    const count = parseInt(result.count, 10)
+    return count + 1
+  }
+
 }

@@ -89,7 +89,7 @@ export interface ProjectAssignment {
 export const createProjectSchema = z.object({
   id: z.string().uuid().optional(),
   name: z.string().min(2).max(100),
-  internal_code: z.string().min(1).max(50),
+  internal_code: z.string().max(50).optional(),
   status: z.string().min(1),
   priority: z.string().min(1),
   type: z.string().min(1),
@@ -107,8 +107,8 @@ export const createProjectSchema = z.object({
   }),
   season: z.string().min(1).max(50).optional(),
   active_alerts: z.boolean().optional(),
-  description: z.string().min(1).max(500).optional(),
-  gt_planner_id: z.string().min(1).max(100).optional(),
+  description: z.string().max(500).optional().nullable(),
+  gt_planner_id: z.string().max(100).optional().nullable(),
 })
 
 export const updateProjectSchema = z.object({

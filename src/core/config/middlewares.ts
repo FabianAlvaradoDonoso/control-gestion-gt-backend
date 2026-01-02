@@ -16,11 +16,22 @@ import { config } from './env'
  * Configuración de CORS según el entorno
  */
 const getCorsOptions = () => {
-  const allowedOrigins =
-    config.nodeEnv === 'production'
-      ? config.allowedOrigins?.split(',') || []
-      : ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8000']
+  const allowedOrigins = config.allowedOrigins
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean)
 
+  // Si no hay orígenes configurados, permitir todos (solo para desarrollo)
+  if (allowedOrigins.length === 0 || allowedOrigins[0] === '*') {
+    return {
+      origin: '*',
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization', 'auth_token'],
+      credentials: false, // No se puede usar credentials: true con origin: '*'
+    }
+  }
+
+  // Para producción, usar lista específica de orígenes con credentials
   return {
     origin: config.nodeEnv === 'production' ? allowedOrigins : '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
@@ -34,6 +45,11 @@ const getCorsOptions = () => {
  * Se ejecuta en orden específico para funcionamiento correcto
  */
 export const setupMiddlewares = (app: Application): void => {
+  // 0. Configurar trust proxy - DEBE IR PRIMERO
+  // Esto es necesario cuando la app está detrás de un reverse proxy (nginx, cloudflared, etc.)
+  // Permite confiar en los headers X-Forwarded-* para obtener la IP real del cliente
+  app.set('trust proxy', 1)
+
   // 1. Security headers con Helmet
   app.use(
     helmet({

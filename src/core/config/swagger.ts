@@ -14,7 +14,7 @@ const options = {
       config.nodeEnv === 'production'
         ? [
             {
-              url: config.apiUrl,
+              url: '/',
               description: 'Production server',
             },
           ]

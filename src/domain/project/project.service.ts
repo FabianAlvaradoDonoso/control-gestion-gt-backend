@@ -65,8 +65,21 @@ export class ProjectService {
 
     const newProject = { ...projectData } as Project
 
+    const client = await this.projectRepository.getClientById(projectData.client_id!)
+    if (!client) {
+      throw new Error('Client not found')
+    }
+    const clientRutPart = client.rut.replace(/\./g, '').replace(/-/g, '').trim().substring(0, 4)
+    const currentYear = new Date().getFullYear().toString()
+    const sequentialNumber = await this.projectRepository.getNextSequentialNumber(
+      projectData.client_id!,
+      currentYear
+    )
+    const internalCode = `${currentYear}-${clientRutPart}-${String(sequentialNumber).padStart(3, '0')}`
+
+
     newProject.created_user_id = currentUser.id
-    newProject.internal_code = projectData.id!
+    newProject.internal_code = internalCode
     newProject.is_active = true
     newProject.active_alerts = false
     newProject.partners = { primary: String(projectData.partner_id), ids: [] }

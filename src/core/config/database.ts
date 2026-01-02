@@ -9,16 +9,10 @@ export const AppDataSource = new DataSource({
   username: config.db.username,
   password: config.db.password,
   database: config.db.database,
-  // synchronize: config.nodeEnv === 'development',
+  synchronize: config.nodeEnv === 'development',
   // logging: config.nodeEnv === 'development',
   entities: config.nodeEnv === 'production' ? ['dist/**/*.entity.js'] : ['src/**/*.entity.ts'],
   migrations:
     config.nodeEnv === 'production' ? ['dist/migrations/**/*.js'] : ['src/migrations/**/*.ts'],
   subscribers: [],
-  ssl:
-    config.nodeEnv === 'production'
-      ? {
-          rejectUnauthorized: false,
-        }
-      : false,
 })
